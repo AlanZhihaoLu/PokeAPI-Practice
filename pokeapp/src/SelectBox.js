@@ -14,7 +14,7 @@ class SelectBox extends React.Component {
         return (
         <div>
             <label htmlFor="colors">Choose a color: </label>
-            <select name="colors" id="colors" onChange={this.props.changeDetected}>
+            <select name="colors" id="colors" onChange={this.props.onSelect}>
                 {this.createSelectItems()}
             </select>
         </div>

@@ -20,9 +20,35 @@ class CardList extends React.Component {
             for (let i=0; i<10; i++) {
                 randomPokemon.push(pokemonURLs.pop([Math.floor(Math.random() * pokemonURLs.length)]))
             }
-            console.log(randomPokemon);
+            console.log(randomPokemon)
+            let pokemonList = [];
+            for (let i=0; i<randomPokemon.length; i++) {
+                fetch(`${randomPokemon[i]}`)
+                    .then(resp2 => resp2.json())
+                    .then(data2 => {
+                        let { name, id, genera } = data2
+                        if (genera.length !== 0) {
+                            genera = genera[7].genus
+                        }
+                        let sprite = '';
+                        if (id > 807) {
+                            sprite = 'https://smithssanitationsupply.ca/wp-content/uploads/2018/06/noimage-1.png'
+                        } else {
+                            sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+                        }
+                        pokemonList.push({
+                            name: name,
+                            id: id,
+                            sprite: sprite,
+                            genus: genera
+                        })
+                        console.log(pokemonList);
+                    })
+                }
+            this.setState({ pokemon: pokemonList });
         })
     }
+
 
     // componentDidMount() {
     // // if (this.state.colorInput.length > 0) {

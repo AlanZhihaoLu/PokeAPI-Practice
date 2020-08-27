@@ -62,7 +62,7 @@ class App extends React.Component {
       <div>
       <h1>Hello!!!</h1>
       <h2>{this.state.colorField}</h2>
-      <SelectBox colorOptions={this.state.colorOptions} changeDetected={this.somethingIsSelected}/>
+      <SelectBox colorOptions={this.state.colorOptions} onSelect={this.somethingIsSelected}/>
       <CardList colorInput={this.state.colorField}/>
       </div>
     )
