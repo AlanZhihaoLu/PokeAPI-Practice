@@ -1,15 +1,13 @@
 import React from 'react';
 import './App.css';
 import CardList from './CardList';
-import SearchBox from './SearchBox';
 import SelectBox from './SelectBox';
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      pokemon: [],
-      colorField: '',
+      colorField: 'black',
       colorOptions: ''
     }
   }
@@ -22,26 +20,36 @@ class App extends React.Component {
       })
     }
 
-  somethingIsTyped = (event) => {
-    this.setState({ searchField: event.target.value })
+  somethingIsSelected = (event) => {
+    this.setState({ colorField: event.target.value })
   }
 
   render() {
-    const { pokemon, colorField } = this.state;
     // const filteredPokemon = pokemon.filter(pokemon => {
     //   return pokemon.name.toLowerCase().includes(searchField.toLowerCase())
     // })
-    let pokemonURLs = [];
-    fetch('https://pokeapi.co/api/v2/pokemon-color/black')
-      .then(resp => resp.json())
-      .then(data => {
-        let pokemonURLs = data.pokemon_species.map(a => a.url);
-        let randomPokemon = [];
-        for (let i=0; i<10; i++) {
-          randomPokemon.push(pokemonURLs.pop([Math.floor(Math.random() * pokemonURLs.length)]))
-        }
-        this.setState({ pokemon: randomPokemon });
-      })
+    // fetch('https://pokeapi.co/api/v2/pokemon-color/black')
+    //   .then(resp => resp.json())
+    //   .then(data => {
+    //     let pokemonURLs = data.pokemon_species.map(a => a.url);
+    //     let randomPokemon = [];
+    //     for (let i=0; i<10; i++) {
+    //       randomPokemon.push(pokemonURLs.pop([Math.floor(Math.random() * pokemonURLs.length)]))
+    //     }
+    //     let pokemonList = [];
+    //     for (let i=0; i<randomPokemon.length; i++) {
+    //       fetch(`${randomPokemon[i]}`)
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //           pokemonList.push({
+    //             name: data.names[8].name,
+    //             id: data.id,
+    //             genus: data.genera[7].genus
+    //           })
+    //         })
+    //     }
+    //     this.setState({ pokemon: randomPokemon });
+    //   })
     // const test = [
     //   {
     //     name: "Pikachu",
@@ -53,8 +61,9 @@ class App extends React.Component {
     return (
       <div>
       <h1>Hello!!!</h1>
-      <SelectBox colorOptions={this.state.colorOptions}/>
-      {/* <CardList possiblePokemon={test}/> */}
+      <h2>{this.state.colorField}</h2>
+      <SelectBox colorOptions={this.state.colorOptions} changeDetected={this.somethingIsSelected}/>
+      <CardList colorInput={this.state.colorField}/>
       </div>
     )
   }

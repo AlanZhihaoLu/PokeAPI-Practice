@@ -4,7 +4,7 @@ class SelectBox extends React.Component {
     createSelectItems() {
         let items = [];         
         for (let i = 0; i <= this.props.colorOptions.length; i++) {             
-             items.push(<option key={i} value={i}>{this.props.colorOptions[i]}</option>);   
+             items.push(<option key={i} value={this.props.colorOptions[i]}>{this.props.colorOptions[i]}</option>);   
              //here I will be creating my options dynamically based on
              //what props are currently passed to the parent component
         }
@@ -13,8 +13,8 @@ class SelectBox extends React.Component {
     render() {
         return (
         <div>
-            <label htmlFor="colors">Choose a color:</label>
-            <select name="colors" id="colors">
+            <label htmlFor="colors">Choose a color: </label>
+            <select name="colors" id="colors" onChange={this.props.changeDetected}>
                 {this.createSelectItems()}
             </select>
         </div>
