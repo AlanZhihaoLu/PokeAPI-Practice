@@ -3,6 +3,7 @@ import './App.css';
 import CardList from '../components/CardList';
 import SelectBox from '../components/SelectBox';
 import Loader from 'react-loader-spinner';
+import ErrorBoundary from '../components/ErrorBoundary';
 
 class App extends React.Component {
   constructor() {
@@ -102,16 +103,18 @@ class App extends React.Component {
     if (this.state.ready === true) {
     return (
       <div>
-      <h1>There sure are some colorful Pokemon out there!</h1>
-      <h2>Use this page to generate 10 random Pokemon of a specified color.<br></br>Enjoy!</h2>
-      <SelectBox colorOptions={this.state.colorOptions} currentColor={this.state.colorField} onSelect={this.somethingIsSelected}/>
-      <h3>Currently Showing: 
-        <span className="firstLetterCap">{(this.state.pokemon.length === 1) ? ' Pikachu!' : ` ${this.state.colorField} Pokemon`}</span>
-        <button className="ma3" onClick={(this.state.pokemon.length === 1) ? this.randButtonIsClicked : this.buttonIsClicked}>
-          {(this.state.pokemon.length === 1) ? 'Choose a color for me!' : 'Show me more!'}
-        </button>
-      </h3>
-      <CardList possiblePokemon={this.state.pokemon}/>
+      <ErrorBoundary>
+        <h1>There sure are some colorful Pokemon out there!</h1>
+        <h2>Use this page to generate 10 random Pokemon of a specified color.<br></br>Enjoy!</h2>
+        <SelectBox colorOptions={this.state.colorOptions} currentColor={this.state.colorField} onSelect={this.somethingIsSelected}/>
+        <h3 className='tc'>Currently Showing: 
+          <span className="firstLetterCap">{(this.state.pokemon.length === 1) ? ' Pikachu!' : ` ${this.state.colorField} Pokemon`}</span>
+          <button className="ma3" onClick={(this.state.pokemon.length === 1) ? this.randButtonIsClicked : this.buttonIsClicked}>
+            {(this.state.pokemon.length === 1) ? 'Choose a color for me!' : 'Show me more!'}
+          </button>
+        </h3>
+        <CardList possiblePokemon={this.state.pokemon}/>
+      </ErrorBoundary>
       </div>
     )
   } else {
