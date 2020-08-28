@@ -63,6 +63,8 @@ class App extends React.Component {
         let { name, id, genera } = await resp.json();
         if (genera.length !== 0) {
           genera = genera[7].genus
+        } else {
+          genera = '[No Data]'
         }
         let sprite = '';
         if (id > 807) {
