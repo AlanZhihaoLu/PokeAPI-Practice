@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import CardList from './CardList';
-import SelectBox from './SelectBox';
+import CardList from '../components/CardList';
+import SelectBox from '../components/SelectBox';
 
 class App extends React.Component {
   constructor() {
@@ -92,8 +92,8 @@ class App extends React.Component {
     if (typeof this.state.pokemon === 'object') {
     return (
       <div>
-      <h1>Hello!</h1>
-      <h2>This will generate 10 random Pokemon of a specified color.<br></br>Enjoy!</h2>
+      <h1>There sure are some colorful Pokemon out there!</h1>
+      <h2>Use this page to generate 10 random Pokemon of a specified color.<br></br>Enjoy!</h2>
       <SelectBox colorOptions={this.state.colorOptions} onSelect={this.somethingIsSelected}/>
       <CardList possiblePokemon={this.state.pokemon}/>
       </div>
@@ -101,7 +101,7 @@ class App extends React.Component {
   } else {
     return (
       <div>
-        <h1>Loading!</h1>
+        <h1>Loading...</h1>
       </div>
     )
   }
